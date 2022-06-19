@@ -1,6 +1,6 @@
 # Create virtual network
 resource "azurerm_virtual_network" "myterraformnetwork" {
-  address_space       = ["10.3.0.0/16"]
+  address_space       = var.network_address
   location            = azurerm_resource_group.rg.location
   name                = "VirtualNet"
   resource_group_name = azurerm_resource_group.rg.name
@@ -8,7 +8,7 @@ resource "azurerm_virtual_network" "myterraformnetwork" {
 
 # Create subnet public
 resource "azurerm_subnet" "publicsubnet" {
-  address_prefixes     = ["10.3.1.0/24"]
+  address_prefixes     = var.public_subnet_address
   name                 = "public"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.myterraformnetwork.name
@@ -17,7 +17,7 @@ resource "azurerm_subnet" "publicsubnet" {
 
 # Create subnet private
 resource "azurerm_subnet" "privatesubnet" {
-  address_prefixes     = ["10.3.2.0/24"]
+  address_prefixes     = var.private_subnet_address
   name                 = "private"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.myterraformnetwork.name

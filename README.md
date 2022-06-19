@@ -50,11 +50,15 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | n/a | `string` | `"123456789Al!"` | no |
 | <a name="input_admin_username"></a> [admin\_username](#input\_admin\_username) | n/a | `string` | `"ubuntu"` | no |
+| <a name="input_data_base_name"></a> [data\_base\_name](#input\_data\_base\_name) | name of db server need be exclusive name and separated '-' | `string` | `"db-serever-postgres"` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix of the resource name. | `string` | `"postgresqlfs"` | no |
+| <a name="input_network_address"></a> [network\_address](#input\_network\_address) | network ip address spaces | `list(string)` | <pre>[<br>  "10.3.0.0/16"<br>]</pre> | no |
 | <a name="input_number_of_vm"></a> [number\_of\_vm](#input\_number\_of\_vm) | n/a | `number` | `3` | no |
+| <a name="input_private_subnet_address"></a> [private\_subnet\_address](#input\_private\_subnet\_address) | public subnet ip address range | `list(string)` | <pre>[<br>  "10.3.2.0/24"<br>]</pre> | no |
+| <a name="input_public_subnet_address"></a> [public\_subnet\_address](#input\_public\_subnet\_address) | public subnet ip address range | `list(string)` | <pre>[<br>  "10.3.1.0/24"<br>]</pre> | no |
 | <a name="input_resource_group_location"></a> [resource\_group\_location](#input\_resource\_group\_location) | Location of the resource group. | `string` | `"eastus"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | `"project"` | no |
-| <a name="input_resource_group_name_prefix"></a> [resource\_group\_name\_prefix](#input\_resource\_group\_name\_prefix) | Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription. | `string` | `"project"` | no |
+| <a name="input_resource_group_name_prefix"></a> [resource\_group\_name\_prefix](#input\_resource\_group\_name\_prefix) | Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription. | `string` | `"test"` | no |
 
 ## Outputs
 
@@ -62,3 +66,4 @@ No modules.
 |------|-------------|
 | <a name="output_public_ip_address"></a> [public\_ip\_address](#output\_public\_ip\_address) | n/a |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
+| <a name="output_vms_ip"></a> [vms\_ip](#output\_vms\_ip) | n/a |
