@@ -1,3 +1,7 @@
+# <ins>Infrastructure as code project, wrote in terraform</ins>
+
+![](images/diagram.png)
+
 ## Requirements
 
 | Name | Version |
