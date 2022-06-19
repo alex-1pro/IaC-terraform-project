@@ -25,10 +25,12 @@ variable "number_of_vm" {
 
 variable "admin_username" {
   type    = string
+  description = "root admin user name in virtual machines"
   default = "ubuntu"
 }
 
 variable "admin_password" {
+  description = "root admin password in virtual machines"
   type    = string
   default = "123456789Al!"
 }
@@ -54,4 +56,16 @@ variable "data_base_name" {
   type = string
   description = "name of db server need be exclusive name and separated '-'"
   default = "db-serever-postgres"
+}
+
+variable "postgresql_db_login" {
+  type = string
+  description = "administrator login"
+  default = "postgres"
+}
+
+variable "postgresql_db_password" {
+  type = string
+  description = "password for postgresql db"
+  default = "p@ssw0rd42"
 }
