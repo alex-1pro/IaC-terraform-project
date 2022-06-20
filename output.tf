@@ -3,10 +3,10 @@ output "resource_group_name" {
 }
 
 output "public_ip_address" {
-    #value = azurerm_linux_virtual_machine.appvm[*].public_ip_address
-    value = azurerm_public_ip.loadbalancerip.id
+    value = azurerm_public_ip.loadbalancerip.ip_address
 }
 
 output "vms_ip" {
     value = azurerm_linux_virtual_machine.appvm[*].private_ip_address
 }
+
