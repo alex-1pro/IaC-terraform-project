@@ -2,6 +2,7 @@
 
 ![](images/diagram.png)
 
+
 ## Requirements
 
 | Name | Version |
@@ -65,6 +66,9 @@ No modules.
 | <a name="input_resource_group_location"></a> [resource\_group\_location](#input\_resource\_group\_location) | Location of the resource group. | `string` | `"eastus"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | `"project"` | no |
 | <a name="input_resource_group_name_prefix"></a> [resource\_group\_name\_prefix](#input\_resource\_group\_name\_prefix) | Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription. | `string` | `"test"` | no |
+| <a name="input_source_address_prefix_private_subnet_nsg_rule_postgresql"></a> [source\_address\_prefix\_private\_subnet\_nsg\_rule\_postgresql](#input\_source\_address\_prefix\_private\_subnet\_nsg\_rule\_postgresql) | source\_address\_prefix\_private\_subnet\_nsg\_rule\_postgresql | `string` | `"10.3.0.0/16"` | no |
+| <a name="input_source_address_prefix_private_subnet_nsg_rule_ssh"></a> [source\_address\_prefix\_private\_subnet\_nsg\_rule\_ssh](#input\_source\_address\_prefix\_private\_subnet\_nsg\_rule\_ssh) | source\_address\_prefix\_private\_subnet\_nsg\_rule\_ssh | `string` | `"10.3.0.0/16"` | no |
+| <a name="input_source_address_prefix_public_subnet_nsg_rule_ssh"></a> [source\_address\_prefix\_public\_subnet\_nsg\_rule\_ssh](#input\_source\_address\_prefix\_public\_subnet\_nsg\_rule\_ssh) | source\_address\_prefix\_public\_subnet\_nsg\_rule\_ssh | `string` | `"10.3.0.0/16"` | no |
 
 ## Outputs
 
