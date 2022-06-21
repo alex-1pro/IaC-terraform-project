@@ -2,14 +2,14 @@
 resource "azurerm_virtual_network" "myterraformnetwork" {
   address_space       = var.network_address
   location            = azurerm_resource_group.rg.location
-  name                = "VirtualNet"
+  name                = "${var.resource_group_name}-VirtualNet"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 # Create subnet public
 resource "azurerm_subnet" "publicsubnet" {
   address_prefixes     = var.public_subnet_address
-  name                 = "public"
+  name                 = "${var.resource_group_name}-public"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.myterraformnetwork.name
 }
@@ -18,7 +18,7 @@ resource "azurerm_subnet" "publicsubnet" {
 # Create subnet private
 resource "azurerm_subnet" "privatesubnet" {
   address_prefixes     = var.private_subnet_address
-  name                 = "private"
+  name                 = "${var.resource_group_name}-private"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.myterraformnetwork.name
   service_endpoints = ["Microsoft.Storage"]
@@ -36,7 +36,7 @@ resource "azurerm_subnet" "privatesubnet" {
 #Create Network Security Group and rule
 resource "azurerm_network_security_group" "publicnsg" {
   location            = azurerm_resource_group.rg.location
-  name                = "publicNSG"
+  name                = "${var.resource_group_name}-publicNSG"
   resource_group_name = azurerm_resource_group.rg.name
 
   security_rule {
@@ -47,7 +47,7 @@ resource "azurerm_network_security_group" "publicnsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "10.3.0.0/16"
+    source_address_prefix      = var.source_address_prefix_public_subnet_nsg_rule_ssh
     destination_address_prefix = "*"
   }
   security_rule {
@@ -76,10 +76,10 @@ resource "azurerm_network_security_group" "publicnsg" {
 
 resource "azurerm_network_security_group" "privatensg" {
   location            = azurerm_resource_group.rg.location
-  name                = "privateNSG"
+  name                = "${var.resource_group_name}-privateNSG"
   resource_group_name = azurerm_resource_group.rg.name
   security_rule {
-    source_address_prefix = "10.3.0.0/16"
+    source_address_prefix = var.source_address_prefix_private_subnet_nsg_rule_ssh
     access    = "Allow"
     direction = "Inbound"
     name      = "SHH"
@@ -90,7 +90,7 @@ resource "azurerm_network_security_group" "privatensg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    source_address_prefix = "10.3.0.0/16"
+    source_address_prefix = var.source_address_prefix_private_subnet_nsg_rule_postgresql
     access    = "Allow"
     direction = "Inbound"
     name      = "postgresql"
@@ -136,7 +136,7 @@ resource "azurerm_public_ip" "loadbalancerip" {
 # Create LoadBlancer
 resource "azurerm_lb" "applb" {
   location            = azurerm_resource_group.rg.location
-  name                = "appLoadBalancer"
+  name                = "${var.resource_group_name}-AppLoadBalancer"
   resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard"
   frontend_ip_configuration {
@@ -156,7 +156,7 @@ resource "azurerm_lb_backend_address_pool" "backendaddresspool" {
 resource "azurerm_network_interface" "appnic" {
   location            = azurerm_resource_group.rg.location
   count               = var.number_of_vm
-  name                = "appNic-${count.index}"
+  name                = "${var.resource_group_name}-appNic-${count.index}"
   resource_group_name = azurerm_resource_group.rg.name
   ip_configuration {
     name                          = "appNicConfiguration"
@@ -181,7 +181,7 @@ resource "azurerm_lb_rule" "lbrule" {
 
 resource "azurerm_lb_probe" "lbbtobe" {
   loadbalancer_id = azurerm_lb.applb.id
-  name            = "health_probe"
+  name            = "${var.resource_group_name}-health_probe"
   port            = 8080
   interval_in_seconds = 5
   resource_group_name = azurerm_resource_group.rg.name

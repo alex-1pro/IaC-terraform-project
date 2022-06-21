@@ -28,15 +28,15 @@ resource "azurerm_linux_virtual_machine" "appvm" {
   count = var.number_of_vm
   admin_username        = var.admin_username
   admin_password      = var.admin_password
-  computer_name         = "appVM-${count.index}"
+  computer_name         = "${var.resource_group_name}-appVM-${count.index}"
   location              = azurerm_resource_group.rg.location
-  name                  = "appVM-${count.index}"
+  name                  = "${var.resource_group_name}-appVM-${count.index}"
   network_interface_ids = [element(azurerm_network_interface.appnic.*.id,count.index)]
   resource_group_name   = azurerm_resource_group.rg.name
   size                  = "Standard_DS1_v2"
   disable_password_authentication = false
   os_disk {
-    name                 = "appOsDisk-${count.index}"
+    name                 = "${var.resource_group_name}-appOsDisk-${count.index}"
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }

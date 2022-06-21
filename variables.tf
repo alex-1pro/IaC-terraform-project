@@ -52,6 +52,24 @@ variable "private_subnet_address" {
   default     = ["10.3.2.0/24"]
 }
 
+variable "source_address_prefix_public_subnet_nsg_rule_ssh"{
+  type = string
+  description = "source_address_prefix_public_subnet_nsg_rule_ssh"
+  default = "10.3.0.0/16"
+}
+
+variable "source_address_prefix_private_subnet_nsg_rule_ssh" {
+  type = string
+  description = "source_address_prefix_private_subnet_nsg_rule_ssh"
+  default = "10.3.0.0/16"
+}
+
+variable "source_address_prefix_private_subnet_nsg_rule_postgresql" {
+  type = string
+  description = "source_address_prefix_private_subnet_nsg_rule_postgresql"
+  default = "10.3.0.0/16"
+}
+
 variable "data_base_name" {
   type = string
   description = "name of db server need be exclusive name and separated '-'"
