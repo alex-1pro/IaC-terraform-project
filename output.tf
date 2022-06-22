@@ -10,3 +10,7 @@ output "vms_ip" {
     value = azurerm_linux_virtual_machine.appvm[*].private_ip_address
 }
 
+output "vm_admin_password" {
+    value = azurerm_linux_virtual_machine.appvm[*].admin_password
+    sensitive = true
+}
