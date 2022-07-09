@@ -33,7 +33,7 @@ resource "azurerm_linux_virtual_machine" "appvm" {
   name                  = "${var.resource_group_name}-appVM-${count.index}"
   network_interface_ids = [element(azurerm_network_interface.appnic.*.id,count.index)]
   resource_group_name   = azurerm_resource_group.rg.name
-  size                  = "Standard_DS1_v2"
+  size                  = var.vm_size
   disable_password_authentication = false
   os_disk {
     name                 = "${var.resource_group_name}-appOsDisk-${count.index}"
