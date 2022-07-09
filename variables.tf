@@ -91,5 +91,5 @@ variable "postgresql_db_password" {
 variable "vm_size" {
   type = string
   description = "size of vm"
-  default = "B_Standard_B1ms"
+  default = "Standard_B1s"
 }
